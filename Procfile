@@ -1,2 +1,1 @@
-web: guinicorn webhook_bot.py
-
+web: python webhook_bot.py
