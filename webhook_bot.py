@@ -1,15 +1,19 @@
 from flask import Flask, request
+import json
 
 app = Flask(__name__)
 
-# Rota para receber o webhook
+# Endpoint do webhook
 @app.route('/webhook', methods=['POST'])
 def telegram_webhook():
-    data = request.json  # Pega os dados enviados pelo Telegram
-    print(f"Mensagem recebida: {data}")  # Mostra a mensagem nos logs
-    return "ok", 200  # Retorna um status de OK para o Telegram
+    # Pega os dados que o Telegram manda
+    data = request.json
+
+    # Aqui, você pode adicionar a lógica para responder às mensagens
+    print(f"Mensagem recebida: {json.dumps(data)}")
+
+    # Retorna um "ok" para o Telegram
+    return "ok", 200
 
 if __name__ == '__main__':
-import os
-port = int(os.environ.get('PORT', 5000))
-app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=5000)
